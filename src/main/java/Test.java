@@ -9,6 +9,7 @@ public class Test {
 
         // Достать пользователя по имени
         TypedQuery<User> query = manager.createQuery("select u from User u where name = ?1", User.class);
+        query.setParameter(1, "имя");
         User userByName = query.getSingleResult();
 
         // 1. Достать пользователя по id
