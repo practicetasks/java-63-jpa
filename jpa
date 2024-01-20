@@ -1,0 +1,39 @@
+
+select * from products;
+select * from reviews where product_id = ?;
+
+class Product {
+    id
+    name
+    reviews
+}
+
+class Review {
+    id,
+    text,
+    rating
+}
+
+int id = rs.getInt("id);
+String name = rs.getString("id);
+
+
+ORM - Object Relational mapping
+JPA - Java Persistence API
+
+products (
+id,
+name,
+price
+)
+
+1. Достать товар по id
+2. Достать всех товаров
+3. Создать товар
+4. Обновить товар
+5. Удалить товар по id
+6. Достать товар по названию
+
+
+
+
