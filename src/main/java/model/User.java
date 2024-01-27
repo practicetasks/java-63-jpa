@@ -2,13 +2,14 @@ package model;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Getter
 @Setter
-@ToString
 @Entity
 @Table(name = "users")
 public class User {
@@ -18,4 +19,29 @@ public class User {
     private String name;
     private String email;
     private int age;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
+    @Override
+    public String toString() {
+        String str = "User{" +
+                "age=" + age +
+                ", email='" + email + '\'' +
+                ", name='" + name +
+                ", posts={";
+
+        StringBuilder builder = new StringBuilder(str);
+        for (Post post : posts) {
+
+            LocalDateTime date = post.getCreatedAt();
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("H:m");
+            String time = date.format(dateTimeFormatter);
+
+            String postString = String.format("title=%s, createdAt=%s", post.getTitle(), time);
+            builder.append(postString);
+        }
+        builder.append("}");
+        return builder.toString();
+    }
 }

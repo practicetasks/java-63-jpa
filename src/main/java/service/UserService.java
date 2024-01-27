@@ -8,22 +8,24 @@ import java.util.Scanner;
 
 @Getter
 public class UserService {
-    private final UserDao userDao;
     private final Scanner scanner;
 
     public UserService(Scanner scanner) {
-        this.userDao = new UserDao();
         this.scanner = scanner;
     }
 
     public void findById() {
-        int id = Integer.parseInt(scanner.nextLine());
-        User user = userDao.findById(id);
-        if (user == null) {
-            return;
-        }
+        try (UserDao dao = new UserDao()) {
+            int id = Integer.parseInt(scanner.nextLine());
+            User user = dao.findById(id);
+            if (user == null) {
+                System.out.println("not found");
+            }
 
-        System.out.println(user);
+            System.out.println(user);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void create() {
@@ -41,7 +43,7 @@ public class UserService {
         user.setEmail(email);
         user.setAge(age);
 
-        userDao.create(user);
+//        userDao.create(user);
 
     }
 

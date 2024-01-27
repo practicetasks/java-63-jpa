@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class UserDao {
+public class UserDao implements AutoCloseable {
     static EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
     static EntityManager manager = factory.createEntityManager();
 
@@ -40,5 +40,12 @@ public class UserDao {
 
     public void delete(User user) {
 
+    }
+
+    @Override
+    public void close() throws Exception {
+        if (manager.isOpen()) {
+            manager.close();
+        }
     }
 }
