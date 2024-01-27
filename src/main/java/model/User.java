@@ -32,10 +32,10 @@ public class User {
                 ", posts={";
 
         StringBuilder builder = new StringBuilder(str);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("H:m");
         for (Post post : posts) {
 
             LocalDateTime date = post.getCreatedAt();
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("H:m");
             String time = date.format(dateTimeFormatter);
 
             String postString = String.format("title=%s, createdAt=%s", post.getTitle(), time);
