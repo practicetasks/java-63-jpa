@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.List;
 
 @Getter
@@ -29,19 +30,24 @@ public class User {
                 "age=" + age +
                 ", email='" + email + '\'' +
                 ", name='" + name +
-                ", posts={";
+                ", posts=[";
 
         StringBuilder builder = new StringBuilder(str);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("H:m");
-        for (Post post : posts) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
+        Iterator<Post> postIterator = posts.iterator();
+        while (postIterator.hasNext()) {
+            Post post = postIterator.next();
             LocalDateTime date = post.getCreatedAt();
             String time = date.format(dateTimeFormatter);
 
-            String postString = String.format("title=%s, createdAt=%s", post.getTitle(), time);
+            String postString = String.format("Post={title=%s, createdAt=%s}", post.getTitle(), time);
             builder.append(postString);
+            if (postIterator.hasNext()) {
+                builder.append(", ");
+            }
         }
-        builder.append("}");
-        return builder.toString();
+
+        return builder.append("]}").toString();
     }
 }
