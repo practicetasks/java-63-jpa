@@ -1,8 +1,6 @@
 package model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -11,6 +9,9 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "posts")
 public class Post {
 
@@ -25,8 +26,8 @@ public class Post {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
 }

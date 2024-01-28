@@ -15,17 +15,14 @@ public class UserService {
     }
 
     public void findById() {
-        try (UserDao dao = new UserDao()) {
-            int id = Integer.parseInt(scanner.nextLine());
-            User user = dao.findById(id);
-            if (user == null) {
-                System.out.println("not found");
-            }
-
-            System.out.println(user);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        UserDao dao = new UserDao();
+        int id = Integer.parseInt(scanner.nextLine());
+        User user = dao.findById(id);
+        if (user == null) {
+            System.out.println("not found");
         }
+
+        System.out.println(user);
     }
 
     public void create() {
@@ -43,11 +40,10 @@ public class UserService {
         user.setEmail(email);
         user.setAge(age);
 
-//        userDao.create(user);
-
+        UserDao dao = new UserDao();
+        dao.create(user);
+        System.out.println("Пользователь добавлен");
     }
-
-
 }
 
 

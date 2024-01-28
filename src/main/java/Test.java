@@ -1,7 +1,6 @@
-import dao.PostDao;
-import dao.UserDao;
-import model.Post;
-import model.User;
+import service.PostService;
+
+import java.util.Scanner;
 
 public class Test {
 //    public static void main(String[] args) {
@@ -21,15 +20,26 @@ public class Test {
 //    }
 
     public static void main(String[] args) {
-        PostDao postDao = new PostDao();
+        PostService service = new PostService(new Scanner(System.in));
+
+        service.create();
 
 
-        Post post = postDao.getPost();
-
-        UserDao userDao = new UserDao();
-
-        User user = userDao.findById(1);
-        System.out.println(user);
+//        Post post = postDao.getPost();
+//
+//        UserDao userDao = new UserDao();
+//
+//        User user = userDao.findById(1);
+//        System.out.println(user);
+//
+//        LocalDateTime now = LocalDateTime.now();
+//
+//
+//        Duration duration = Duration.between(now, post.getCreatedAt());
+//        Period period = Period.between(now.toLocalDate(), post.getCreatedAt().toLocalDate());
+//
+//        System.out.println(duration);
+//        System.out.println(period);
 
     }
 
