@@ -22,9 +22,11 @@ public class Test {
     public static void main(String[] args) {
         PostService service = new PostService(new Scanner(System.in));
 
-        service.create();
+//        service.create();
 
+//        service.findById();
 
+        service.findAll();
 //        Post post = postDao.getPost();
 //
 //        UserDao userDao = new UserDao();

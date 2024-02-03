@@ -19,6 +19,18 @@ public class PostService {
         this.scanner = scanner;
     }
 
+    public void findById() {
+        System.out.println("Введите id поста");
+        int id = Integer.parseInt(scanner.nextLine());
+
+        Post post = postDao.findById(id);
+        System.out.println(post);
+    }
+
+    public void findAll() {
+        System.out.println(postDao.findAll());
+    }
+
 
     public void create() {
         System.out.println("Введите id пользователя");

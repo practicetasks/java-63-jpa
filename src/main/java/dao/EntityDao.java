@@ -6,12 +6,22 @@ import javax.persistence.Persistence;
 import java.util.List;
 
 public abstract class EntityDao<T> {
-    static EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
-    static EntityManager manager = factory.createEntityManager();
+    protected static EntityManagerFactory factory = Persistence.createEntityManagerFactory("default");
+    protected static EntityManager manager = factory.createEntityManager();
 
-    public abstract T findById(int id);
+    private final Class<T> type;
 
-    public abstract List<T> findAll();
+    public EntityDao(Class<T> type) {
+        this.type = type;
+    }
+
+    public T findById(int id) {
+        return manager.find(type, id);
+    }
+
+    public List<T> findAll() {
+        return manager.createQuery("select t from " + type.getSimpleName() + " t", type).getResultList();
+    }
 
     public void update(T entity) {
         try {
