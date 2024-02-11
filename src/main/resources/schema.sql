@@ -25,3 +25,20 @@ set time zone 'Asia/Almaty';
 
 insert into posts (title, subtitle, created_at, user_id)
 values ('testPost2', '', now(), (select id from users where name = 'testUser'));
+
+
+
+create table options
+(
+    id          serial primary key,
+    name        varchar not null,
+    category_id integer references categories (id)
+);
+
+create table values
+(
+    id         serial primary key,
+    name       varchar not null,
+    product_id integer references products (id),
+    option_id  integer references options (id)
+);
