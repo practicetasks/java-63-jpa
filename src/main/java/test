@@ -1,0 +1,14 @@
+   public static void deleteOptionsForCategory(EntityManager em, int categoryId, int optionIdToDelete) {
+        em.getTransaction().begin();
+
+        Category selectedCategory = em.find(Category.class, categoryId);
+
+        List<Option> options = selectedCategory.getOptionsList();
+
+        if (optionIdToDelete != 0) {
+           return;
+        }
+       ...
+
+        em.getTransaction().commit();
+    }

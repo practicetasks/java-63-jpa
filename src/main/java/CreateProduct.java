@@ -25,13 +25,8 @@ public class CreateProduct {
         System.out.println("Выберите категорию");
         int categoryId = Integer.parseInt(scanner.nextLine());
 
-        Category productCategory = null;
-        for (Category category : categories) {
-            if (category.getId() == categoryId) {
-                productCategory = category;
-                break;
-            }
-        }
+        Category productCategory = manager.find(Category.class, categoryId);
+
         if (productCategory == null) {
             System.out.println("Несущ id");
             return;
